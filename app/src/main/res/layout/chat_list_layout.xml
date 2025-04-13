@@ -2,17 +2,61 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="@dimen/_70sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:layout_width="308dp"
-        android:layout_height="62dp"
-        android:background="@android:color/background_light"
+        android:layout_width="0dp"
+        android:layout_weight="7"
+        android:layout_height="match_parent"
+        android:padding="7dp"
+        android:layout_margin="6dp"
         android:orientation="vertical"
+        android:background="@drawable/text_background"
         android:weightSum="10"
         tools:layout_editor_absoluteX="72dp"
         tools:layout_editor_absoluteY="102dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="AI response"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:padding="@dimen/_5sdp"
+            android:layout_margin="@dimen/_3sdp"
+            android:textColorHint="@color/black"
+            android:textSize="@dimen/_15ssp"/>
+
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:padding="7dp"
+        android:layout_margin="7dp"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/circle_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:src="@drawable/ai"
+                android:layout_centerInParent="true"
+                app:tint="@color/white" />
+
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
