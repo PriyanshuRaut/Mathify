@@ -12,7 +12,6 @@
         android:weightSum="10"
         tools:layout_editor_absoluteX="72dp"
         tools:layout_editor_absoluteY="102dp">
-
     </LinearLayout>
 
 
