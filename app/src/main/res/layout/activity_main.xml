@@ -6,6 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <TextView
@@ -33,7 +34,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
         <ImageView
             android:id="@+id/history_image"
             android:layout_width="@dimen/_30sdp"
@@ -87,7 +87,9 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 android:textSize="@dimen/_13ssp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:drawableEnd="@drawable/ic_send"
+                android:drawablePadding="8dp"/>
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -107,7 +109,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
                 <ImageView
                     android:id="@+id/add_button"
                     android:layout_width="@dimen/_30sdp"
@@ -127,7 +128,6 @@
                 app:layout_constraintBottom_toTopOf="@id/add_button_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
-
                 <ImageView
                     android:id="@+id/mic_button"
                     android:layout_width="@dimen/_30sdp"
@@ -147,7 +147,6 @@
                 app:layout_constraintTop_toBottomOf="@id/add_button_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
-
                 <ImageView
                     android:id="@+id/gallery_button"
                     android:layout_width="@dimen/_30sdp"

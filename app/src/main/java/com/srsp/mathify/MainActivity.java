@@ -7,24 +7,27 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.srsp.mathify.adapter.ChatAdapter;
+import com.srsp.mathify.adapter.HistoryAdapter;
 import com.srsp.mathify.model.ChatMessage;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -74,15 +77,21 @@ public class MainActivity extends AppCompatActivity {
                 if (actionId == EditorInfo.IME_ACTION_DONE ||
                         (keyEvent != null && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER
                                 && keyEvent.getAction() == KeyEvent.ACTION_DOWN)) {
-                    String query = queryView.getText().toString().trim();
-                    if (!query.isEmpty()) {
-                        chatList.add(new ChatMessage("human", query));
-                        chatAdapter.notifyItemInserted(chatList.size() - 1);
-                        saveHistory("Human: " + query);
-                        callChatAPI(query);
-                        queryView.setText("");
-                    }
+                    sendQuery();
                     return true;
+                }
+                return false;
+            }
+        });
+
+        queryView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (queryView.getRight() - queryView.getCompoundDrawables()[2].getBounds().width())) {
+                        sendQuery();
+                        return true;
+                    }
                 }
                 return false;
             }
@@ -92,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!extraButtonsVisible) {
+                    micButtonLayout.bringToFront();
+                    galleryButtonLayout.bringToFront();
                     micButtonLayout.setAlpha(0f);
                     micButtonLayout.setVisibility(View.VISIBLE);
                     micButtonLayout.animate().alpha(1f).setDuration(300).setListener(null);
@@ -122,17 +133,20 @@ public class MainActivity extends AppCompatActivity {
         historyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String history = sharedPref.getString("history", "");
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Chat History");
-                builder.setMessage(history.isEmpty() ? "No history available" : history);
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) { }
-                });
-                builder.create().show();
+                showHistoryDialog();
             }
         });
+    }
+
+    void sendQuery() {
+        String query = queryView.getText().toString().trim();
+        if (!query.isEmpty()) {
+            chatList.add(new ChatMessage("human", query));
+            chatAdapter.notifyItemInserted(chatList.size() - 1);
+            saveHistory("Human: " + query);
+            callChatAPI(query);
+            queryView.setText("");
+        }
     }
 
     void saveHistory(String message) {
@@ -167,7 +181,10 @@ public class MainActivity extends AppCompatActivity {
                     String resStr = response.body().string();
                     try {
                         JSONObject resJson = new JSONObject(resStr);
-                        String aiResponse = resJson.getString("response");
+                        JSONArray choices = resJson.getJSONArray("choices");
+                        JSONObject firstChoice = choices.getJSONObject(0);
+                        JSONObject messageObj = firstChoice.getJSONObject("message");
+                        String aiResponse = messageObj.getString("content");
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -181,5 +198,35 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         } catch (Exception e) { }
+    }
+
+    void showHistoryDialog() {
+        String historyData = sharedPref.getString("history", "");
+        ArrayList<String> historyList = new ArrayList<>();
+        if (!historyData.isEmpty()) {
+            String[] items = historyData.split("\n");
+            for (String item : items) {
+                if (!item.trim().isEmpty()) {
+                    historyList.add(item);
+                }
+            }
+        }
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View dialogView = inflater.inflate(R.layout.dialog_history, null);
+        RecyclerView historyListView = dialogView.findViewById(R.id.history_list_view);
+
+        historyListView.setLayoutManager(new LinearLayoutManager(this));
+        HistoryAdapter historyAdapter = new HistoryAdapter(this, historyList);
+        historyListView.setAdapter(historyAdapter);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Chat History");
+        builder.setView(dialogView);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) { }
+        });
+        builder.create().show();
     }
 }
