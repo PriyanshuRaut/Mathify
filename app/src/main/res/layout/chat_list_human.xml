@@ -11,7 +11,7 @@
         android:id="@+id/text_container"
         android:layout_width="0dp"
         android:layout_weight="8"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="7dp"
         android:layout_margin="6dp"
         android:orientation="vertical"
@@ -23,7 +23,7 @@
         <TextView
             android:id="@+id/your_text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/_3sdp"
             android:hint="Your Text"
             android:padding="@dimen/_5sdp"
@@ -38,7 +38,7 @@
         android:id="@+id/icon_container"
         android:layout_width="0dp"
         android:layout_weight="2"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/_58sdp"
         android:padding="7dp"
         android:layout_margin="7dp">
 
