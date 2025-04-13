@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ai_response_layout"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_70sdp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="@dimen/_70sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/icon_container"
         android:layout_width="0dp"
         android:layout_weight="2"
-        android:padding="7dp"
+        android:layout_height="match_parent"
         android:layout_margin="7dp"
-        android:layout_height="match_parent">
+        android:padding="7dp">
 
         <RelativeLayout
+            android:id="@+id/icon_relative_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -23,37 +27,39 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/ai_image_view"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
-                android:src="@drawable/ai"
                 android:layout_centerInParent="true"
+                android:src="@drawable/ai"
                 app:tint="@color/white" />
-
 
         </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
+        android:id="@+id/ai_text_container"
         android:layout_width="0dp"
         android:layout_weight="8"
         android:layout_height="match_parent"
-        android:padding="7dp"
         android:layout_margin="6dp"
         android:orientation="vertical"
+        android:padding="7dp"
         android:background="@drawable/text_background"
         android:weightSum="10"
         tools:layout_editor_absoluteX="72dp"
         tools:layout_editor_absoluteY="102dp">
 
         <TextView
+            android:id="@+id/ai_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="@dimen/_3sdp"
             android:hint="AI response"
+            android:padding="@dimen/_5sdp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:padding="@dimen/_5sdp"
-            android:layout_margin="@dimen/_3sdp"
             android:textColorHint="@color/black"
             android:textSize="@dimen/_15ssp"/>
 

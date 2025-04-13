@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -15,6 +16,7 @@
         android:text="@string/app_name"
         android:textColor="#BD4D4D"
         android:textSize="@dimen/_23sdp"
+        android:textAllCaps="true"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.048"
@@ -22,6 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
+        android:id="@+id/history_layout"
         android:layout_width="@dimen/_46sdp"
         android:layout_height="@dimen/_46sdp"
         android:layout_marginTop="@dimen/_4sdp"
@@ -30,25 +33,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        
+
         <ImageView
+            android:id="@+id/history_image"
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
             android:src="@drawable/history"
             android:layout_centerInParent="true"
             app:tint="@color/white" />
-
-
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="@dimen/_8sdp"
-        android:layout_margin="@dimen/_6sdp"
-        tools:listitem="@layout/chat_list_ai"
+        android:layout_margin="@dimen/_3sdp"
+        android:padding="@dimen/_1sdp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/history_layout"
+        tools:layout_editor_absoluteX="5dp"
+        tools:listitem="@layout/chat_list_ai" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -56,9 +60,11 @@
         android:layout_height="@dimen/_70sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/input_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="6dp"
@@ -70,20 +76,22 @@
             tools:layout_editor_absoluteX="72dp"
             tools:layout_editor_absoluteY="102dp">
 
-            <TextView
+            <EditText
+                android:id="@+id/query_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/_3sdp"
+                android:layout_margin="@dimen/_2sdp"
                 android:hint="Write your query"
-                android:padding="@dimen/_5sdp"
+                android:padding="@dimen/_8sdp"
+                android:background="@drawable/text_background"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
-                android:textSize="@dimen/_15ssp"
+                android:textSize="@dimen/_13ssp"
                 android:textStyle="bold" />
-
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/add_button_container"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="7dp"
@@ -91,6 +99,7 @@
             android:padding="7dp">
 
             <RelativeLayout
+                android:id="@+id/add_button_layout"
                 android:layout_width="@dimen/_48sdp"
                 android:layout_height="match_parent"
                 android:background="@drawable/circle_bg_2"
@@ -100,19 +109,53 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:id="@+id/add_button"
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_centerInParent="true"
                     android:src="@drawable/ic_add"
                     app:tint="@color/white" />
-
-
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/mic_button_layout"
+                android:layout_width="@dimen/_48sdp"
+                android:layout_height="@dimen/_48sdp"
+                android:visibility="gone"
+                android:gravity="center"
+                android:background="@drawable/circle_bg_2"
+                app:layout_constraintBottom_toTopOf="@id/add_button_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/mic_button"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_mic"
+                    app:tint="@color/white" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/gallery_button_layout"
+                android:layout_width="@dimen/_48sdp"
+                android:layout_height="@dimen/_48sdp"
+                android:visibility="gone"
+                android:gravity="center"
+                android:background="@drawable/circle_bg_2"
+                app:layout_constraintTop_toBottomOf="@id/add_button_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/gallery_button"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/gallery"
+                    app:tint="@color/white" />
+            </RelativeLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
