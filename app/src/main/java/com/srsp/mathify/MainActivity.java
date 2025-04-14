@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPref;
     SharedPreferences.Editor prefEditor;
     boolean extraButtonsVisible = false;
+    Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         galleryButtonLayout = findViewById(R.id.gallery_button_layout);
         historyButton = findViewById(R.id.history_layout);
         recyclerView = findViewById(R.id.recycler_view);
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         chatAdapter = new ChatAdapter(chatList);
@@ -110,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
                     galleryButtonLayout.setVisibility(View.VISIBLE);
                     galleryButtonLayout.animate().alpha(1f).setDuration(300).setListener(null);
                     extraButtonsVisible = true;
+                    vibrator.vibrate(45);
                 } else {
                     micButtonLayout.animate().alpha(0f).setDuration(300)
                             .setListener(new AnimatorListenerAdapter() {
@@ -133,7 +137,22 @@ public class MainActivity extends AppCompatActivity {
         historyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                vibrator.vibrate(45);
                 showHistoryDialog();
+            }
+        });
+
+        micButtonLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vibrator.vibrate(45);
+            }
+        });
+
+        galleryButtonLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vibrator.vibrate(45);
             }
         });
     }

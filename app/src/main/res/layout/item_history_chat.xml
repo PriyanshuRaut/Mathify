@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/black"
         android:padding="12dp">
 
         <TextView
@@ -29,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="Hello, how are you?"
-            android:textColor="#000000"/>
+            android:textColor="#ffffff"/>
 
         <TextView
             android:id="@+id/tv_ai"
@@ -37,7 +38,7 @@
             android:layout_height="wrap_content"
             android:text="AI:"
             android:textStyle="bold"
-            android:textColor="#3F51B5"
+            android:textColor="#606EBB"
             android:textSize="14sp"/>
 
         <TextView
@@ -45,6 +46,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="I am fine, thank you!"
-            android:textColor="#000000"/>
+            android:textColor="#ffffff"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
