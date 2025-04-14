@@ -335,7 +335,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                     String resStr = response.body().string();
                     Log.d("ChatAPI", "Response Code: " + response.code() + " Body: " + resStr);
-                    Toast.makeText(MainActivity.this, ""+response.code()+"Body"+resStr, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(MainActivity.this, ""+response.code()+"Body"+resStr, Toast.LENGTH_SHORT).show();
                     try {
                         JSONObject resJson = new JSONObject(resStr);
                         JSONArray choices = resJson.getJSONArray("choices");
