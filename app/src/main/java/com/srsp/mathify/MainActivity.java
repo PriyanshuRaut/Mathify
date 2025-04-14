@@ -5,7 +5,9 @@ import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -90,9 +92,16 @@ public class MainActivity extends AppCompatActivity {
         queryView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+
                 if(event.getAction() == MotionEvent.ACTION_UP) {
                     if(event.getRawX() >= (queryView.getRight() - queryView.getCompoundDrawables()[2].getBounds().width())) {
                         sendQuery();
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                            vibrator.vibrate(android.os.VibrationEffect.createOneShot(45, android.os.VibrationEffect.DEFAULT_AMPLITUDE));
+                        } else {
+                            vibrator.vibrate(45);
+                        }
+
                         return true;
                     }
                 }
@@ -113,7 +122,12 @@ public class MainActivity extends AppCompatActivity {
                     galleryButtonLayout.setVisibility(View.VISIBLE);
                     galleryButtonLayout.animate().alpha(1f).setDuration(300).setListener(null);
                     extraButtonsVisible = true;
-                    vibrator.vibrate(45);
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        vibrator.vibrate(android.os.VibrationEffect.createOneShot(45, android.os.VibrationEffect.DEFAULT_AMPLITUDE));
+                    } else {
+                        vibrator.vibrate(45);
+                    }
+
                 } else {
                     micButtonLayout.animate().alpha(0f).setDuration(300)
                             .setListener(new AnimatorListenerAdapter() {
@@ -137,7 +151,12 @@ public class MainActivity extends AppCompatActivity {
         historyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                vibrator.vibrate(45);
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    vibrator.vibrate(android.os.VibrationEffect.createOneShot(45, android.os.VibrationEffect.DEFAULT_AMPLITUDE));
+                } else {
+                    vibrator.vibrate(45);
+                }
+
                 showHistoryDialog();
             }
         });
@@ -145,7 +164,12 @@ public class MainActivity extends AppCompatActivity {
         micButtonLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                    vibrator.vibrate(android.os.VibrationEffect.createOneShot(45, VibrationEffect.DEFAULT_AMPLITUDE));
+                }
+                else{
                 vibrator.vibrate(45);
+                }
             }
         });
 
