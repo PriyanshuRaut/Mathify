@@ -32,6 +32,15 @@
             android:textSize="@dimen/_15ssp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/attached_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="4dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            android:contentDescription="Attached image" />
+
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

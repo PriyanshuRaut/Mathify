@@ -59,7 +59,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_70sdp"
+        android:layout_height="@dimen/_85sdp"
         android:clipChildren="false"
         android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -75,30 +75,53 @@
             android:layout_weight="8"
             android:background="@drawable/text_background"
             android:orientation="vertical"
-            android:padding="7dp"
-            android:weightSum="10">
+            android:padding="7dp">
+
+            <RelativeLayout
+                android:id="@+id/attachment_container"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="4dp"
+                android:visibility="invisible">
+
+                <ImageView
+                    android:id="@+id/image_attachment"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_placeholder" />
+
+                <ImageView
+                    android:id="@+id/remove_attachment"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/circle_bg"
+                    android:src="@drawable/ic_close"
+                    android:visibility="visible"/>
+            </RelativeLayout>
 
             <EditText
                 android:id="@+id/query_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/_2sdp"
+                android:layout_height="wrap_content"
                 android:hint="Write your query"
-                android:padding="@dimen/_8sdp"
+                android:padding="8dp"
                 android:background="@drawable/text_background"
                 android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="@dimen/_13ssp"
-                android:textStyle="bold"
+                android:textSize="13sp"
                 android:drawableEnd="@drawable/ic_send"
                 android:drawablePadding="8dp"/>
+
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/add_button_container"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/_60sdp"
             android:layout_margin="7dp"
+            android:layout_gravity="center"
             android:layout_weight="2"
             android:padding="7dp"
             android:clipChildren="false"
