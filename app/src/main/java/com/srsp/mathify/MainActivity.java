@@ -351,14 +351,14 @@ public class MainActivity extends AppCompatActivity {
                         });
                     } catch (Exception e) {
                         Log.e("ChatAPI", "Parsing error: " + e.getMessage());
-                        Toast.makeText(MainActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                         runOnUiThread(() -> waitingForResponse = false);
                     }
                 }
             });
         } catch (Exception e) {
             Log.e("ChatAPI", "Exception: " + e.getMessage());
-            Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
             waitingForResponse = false;
         }
     }
