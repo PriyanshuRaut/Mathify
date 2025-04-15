@@ -4,6 +4,7 @@
     <color name="onPrimary">#FFFFFF</color>
     <color name="primaryContainer">#EADDFF</color>
     <color name="onPrimaryContainer">#21005D</color>
+    <color name="dark">#222222</color>
 
     <color name="secondary">#625B71</color>
     <color name="onSecondary">#FFFFFF</color>

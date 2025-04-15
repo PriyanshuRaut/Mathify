@@ -13,9 +13,10 @@
         android:layout_weight="8"
         android:layout_height="wrap_content"
         android:padding="7dp"
+        android:layout_gravity="center"
         android:layout_margin="6dp"
         android:orientation="vertical"
-        android:background="@drawable/text_background"
+        android:background="@drawable/text_background_2"
         android:weightSum="10"
         tools:layout_editor_absoluteX="72dp"
         tools:layout_editor_absoluteY="102dp">
@@ -25,11 +26,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_3sdp"
-            android:hint="Your Text"
+            android:hint="@string/human_default"
             android:padding="@dimen/_5sdp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="@dimen/_15ssp"
+            android:textSize="@dimen/_10ssp"
             android:textStyle="bold" />
 
         <ImageView
@@ -56,8 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:background="@drawable/circle_bg"
-            android:backgroundTint="#9ACBD0"
+            android:background="@drawable/circle_bg_3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

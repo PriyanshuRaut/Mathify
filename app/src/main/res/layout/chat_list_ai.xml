@@ -20,8 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:background="@drawable/circle_bg"
-            android:backgroundTint="#9ACBD0"
+            android:background="@drawable/circle_bg_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -45,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="6dp"
         android:orientation="vertical"
+        android:layout_gravity="center"
         android:padding="7dp"
         android:background="@drawable/text_background"
         android:weightSum="10"
@@ -56,12 +56,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_3sdp"
-            android:hint="AI response"
+            android:hint="@string/ai_default_reply"
             android:padding="@dimen/_5sdp"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="@dimen/_15ssp"/>
+            android:textSize="@dimen/_10ssp"/>
 
     </LinearLayout>
 

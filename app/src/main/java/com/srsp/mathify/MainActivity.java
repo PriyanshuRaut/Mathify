@@ -24,10 +24,13 @@ import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -74,13 +77,17 @@ public class MainActivity extends AppCompatActivity {
     private ImageView removeAttachment;
     private View attachmentContainer;
     private Bitmap attachedBitmap = null;
+    LinearLayout inputLayout;
     private boolean waitingForResponse = false;
     String IMGDB_API_KEY = "4ae96be64fc39a9eb2ac57422223064b";
+    Switch themeSwitch;
+    boolean shouldShowInputLayout = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        hideSystemUI();
         queryView = findViewById(R.id.query_view);
         addButton = findViewById(R.id.add_button);
         micButtonLayout = findViewById(R.id.mic_button_layout);
@@ -93,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
         removeAttachment = findViewById(R.id.remove_attachment);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         chatAdapter = new ChatAdapter(chatList);
+        themeSwitch = findViewById(R.id.themeSwitch);
+        inputLayout = findViewById(R.id.linearLayout);
         recyclerView.setAdapter(chatAdapter);
         sharedPref = getSharedPreferences("chat_pref", Context.MODE_PRIVATE);
         prefEditor = sharedPref.edit();
@@ -150,6 +159,39 @@ public class MainActivity extends AppCompatActivity {
                 extraButtonsVisible = false;
             }
         });
+
+        boolean isDark = false;
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        isDark = sharedPreferences.getBoolean("isDark", false);
+        themeSwitch.setChecked(isDark);
+        ConstraintLayout main = findViewById(R.id.main);
+        if (isDark){
+            main.setBackgroundColor(getResources().getColor(R.color.dark));
+        }
+        else {
+            main.setBackgroundColor(getResources().getColor(R.color.white));
+        }
+
+
+        //        android:background="#222222"
+        themeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+
+            if (isChecked){
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("isDark", isChecked);
+                editor.apply();
+                recreate();
+            }
+            else{
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("isDark", isChecked);
+                editor.apply();
+                recreate();
+            }
+
+
+        } );
+
         historyButton.setOnClickListener(view -> {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 vibrator.vibrate(VibrationEffect.createOneShot(45, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -220,11 +262,13 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(String imageUrl) {
                     callChatAPI(textQuery, imageUrl);
+//                    inputLayout.setBackgroundResource(R.drawable.text_background_3);
                 }
                 @Override
                 public void onFailure(String error) {
                     waitingForResponse = false;
                     Toast.makeText(MainActivity.this, "Image upload failed: " + error, Toast.LENGTH_SHORT).show();
+//                    inputLayout.setBackgroundResource(null);
                 }
             });
         } else {
@@ -446,4 +490,18 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), PERMISSION_REQUEST_CODE);
         }
     }
+
+    private void hideSystemUI() {
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+        );
+    }
+
+
 }

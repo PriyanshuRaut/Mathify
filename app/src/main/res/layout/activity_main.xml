@@ -3,27 +3,50 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:clipToPadding="false"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:id="@+id/main"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/text_background_4"
+            android:fontFamily="@font/poetsenone"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/app_name"
+            android:textAllCaps="true"
+            android:textColor="#F3F2F2"
+            android:textSize="@dimen/_25sdp"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.062"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Switch
+        android:id="@+id/themeSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10ssp"
-        android:text="@string/app_name"
-        android:textColor="#BD4D4D"
-        android:textSize="@dimen/_23sdp"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.048"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="Dark"
+        android:textSize="@dimen/_13ssp"
+        android:background="@drawable/text_background_5"
+        android:textColor="#FFFFFF"
+        android:padding="@dimen/_7sdp"
+        android:switchPadding="@dimen/_8sdp"
+        android:layout_margin="@dimen/_4sdp"
+        app:layout_constraintBottom_toTopOf="@+id/recycler_view"
+        app:layout_constraintEnd_toStartOf="@+id/history_layout"
+        app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <RelativeLayout
         android:id="@+id/history_layout"
@@ -48,7 +71,7 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/_3sdp"
+        android:layout_margin="@dimen/_2sdp"
         android:padding="@dimen/_1sdp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/history_layout"
@@ -59,7 +82,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_85sdp"
+        android:layout_height="@dimen/_75sdp"
         android:clipChildren="false"
         android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -73,16 +96,16 @@
             android:layout_height="match_parent"
             android:layout_margin="6dp"
             android:layout_weight="8"
-            android:background="@drawable/text_background"
             android:orientation="vertical"
             android:padding="7dp">
 
             <RelativeLayout
                 android:id="@+id/attachment_container"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="0dp"
+                android:layout_weight="4"
                 android:layout_marginTop="4dp"
-                android:visibility="invisible">
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/image_attachment"
@@ -93,8 +116,8 @@
 
                 <ImageView
                     android:id="@+id/remove_attachment"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
                     android:layout_margin="4dp"
                     android:background="@drawable/circle_bg"
@@ -105,13 +128,19 @@
             <EditText
                 android:id="@+id/query_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Write your query"
+                android:layout_height="0dp"
+                android:layout_weight="6"
+                android:layout_gravity="bottom"
+                android:hint="Ask me your Maths Doubt..."
                 android:padding="8dp"
-                android:background="@drawable/text_background"
+                android:layout_margin="3dp"
+                android:textColorHint="#373232"
+                android:singleLine="true"
+                android:background="@drawable/text_background_1"
                 android:textColor="@color/black"
-                android:textSize="13sp"
+                android:textSize="@dimen/_10ssp"
                 android:drawableEnd="@drawable/ic_send"
+                android:drawableTint="#5C127B"
                 android:drawablePadding="8dp"/>
 
         </LinearLayout>
@@ -189,5 +218,7 @@
             android:layout_centerInParent="true"
             android:src="@drawable/gallery" />
     </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

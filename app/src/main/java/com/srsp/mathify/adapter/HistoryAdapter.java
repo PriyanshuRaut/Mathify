@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.srsp.mathify.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
 

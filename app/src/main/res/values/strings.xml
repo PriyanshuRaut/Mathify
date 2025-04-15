@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Mathify</string>
+    <string name="human_default">Query...\n</string>
+    <string name="ai_default_reply">AI Reply...</string>
 </resources>
