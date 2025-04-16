@@ -35,7 +35,7 @@ android {
 }
 
 def getEnvValue(String key) {
-    def envFile = rootProject.file(".env")
+    def envFile = rootProject.file("key.env")
     if (!envFile.exists()) return ""
     def props = new Properties()
     envFile.withInputStream { props.load(it) }
