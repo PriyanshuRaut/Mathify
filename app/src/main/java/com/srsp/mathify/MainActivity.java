@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<ChatMessage> chatList = new ArrayList<>();
     OkHttpClient client = new OkHttpClient();
     final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-    String apiKey = "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";
+    String apiKey = BuildConfig.API_KEY;
     String url = "https://api.groq.com/openai/v1/chat/completions";
     SharedPreferences sharedPref;
     SharedPreferences.Editor prefEditor;
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     private Bitmap attachedBitmap = null;
     LinearLayout inputLayout;
     private boolean waitingForResponse = false;
-    String IMGDB_API_KEY = "4ae96be64fc39a9eb2ac57422223064b";
+    String IMGDB_API_KEY = BuildConfig.IMGDB_API_KEY;
     Switch themeSwitch;
     boolean shouldShowInputLayout = true;
 

@@ -6,12 +6,18 @@ android {
     namespace 'com.srsp.mathify'
     compileSdk 35
 
+    buildFeatures {
+        buildConfig true
+    }
+
     defaultConfig {
         applicationId "com.srsp.mathify"
         minSdk 27
         targetSdk 35
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "IMGDB_API_KEY", "\"${getEnvValue("IMGDB_API_KEY")}\""
+        buildConfigField "String", "API_KEY", "\"${getEnvValue("API_KEY")}\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -26,6 +32,14 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+}
+
+def getEnvValue(String key) {
+    def envFile = rootProject.file(".env")
+    if (!envFile.exists()) return ""
+    def props = new Properties()
+    envFile.withInputStream { props.load(it) }
+    return props.getProperty(key)
 }
 
 dependencies {
