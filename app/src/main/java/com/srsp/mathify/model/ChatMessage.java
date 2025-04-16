@@ -2,10 +2,12 @@ package com.srsp.mathify.model;
 
 import android.graphics.Bitmap;
 
-public class ChatMessage {
+import java.io.Serializable;
+
+public class ChatMessage implements Serializable {
     public String type;
     public String message;
-    public Bitmap image;
+    public transient Bitmap image;
 
     public ChatMessage(String type, String message) {
         this.type = type;

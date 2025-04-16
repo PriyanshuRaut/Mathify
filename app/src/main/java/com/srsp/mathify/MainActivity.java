@@ -106,6 +106,25 @@ public class MainActivity extends AppCompatActivity {
         sharedPref = getSharedPreferences("chat_pref", Context.MODE_PRIVATE);
         prefEditor = sharedPref.edit();
         checkAndRequestPermissions();
+
+        if (savedInstanceState != null) {
+            chatList = (ArrayList<ChatMessage>) savedInstanceState.getSerializable("chatList");
+        } else {
+            chatList = new ArrayList<>();
+        }
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        chatAdapter = new ChatAdapter(chatList);
+        recyclerView.setAdapter(chatAdapter);
+
+        if (savedInstanceState != null) {
+            final int scrollPosition = savedInstanceState.getInt("scrollPosition", 0);
+            recyclerView.scrollToPosition(scrollPosition);
+        }
+
+
+
+
         queryView.setOnEditorActionListener((textView, actionId, keyEvent) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE || (keyEvent != null && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER && keyEvent.getAction() == KeyEvent.ACTION_DOWN)) {
                 sendQuery();
@@ -501,6 +520,19 @@ public class MainActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
         );
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Save the chat list (requires ChatMessage to be Serializable)
+        outState.putSerializable("chatList", chatList);
+
+        // Save RecyclerView scroll position
+        LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+        int scrollPosition = layoutManager.findFirstVisibleItemPosition();
+        outState.putInt("scrollPosition", scrollPosition);
     }
 
 
