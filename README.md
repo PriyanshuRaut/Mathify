@@ -40,6 +40,9 @@ curl https://api.groq.com/openai/v1/chat/completions -s \
 - Modern and sleek UI
 - Prompt history
 
+## Download it from here
+https://github.com/PriyanshuRaut/Mathify/releases/tag/v1.0.0
+
 <div align="center">
   <img src="./image1" alt="Image 1" width="300" style="margin-right: 200px;"/>
   <img src="./image2" alt="Image 2" width="300"/>
