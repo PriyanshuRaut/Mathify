@@ -4,7 +4,7 @@ Mathify is your math tutor which helps you solve complex math’s problem.
 
 **Stuck on a math problem?** Just Take a picture, type, or speak out loud your question, and get a clear and definitive answers fast and efficiently.
 
-Mathify is built using [Grock](https://grok.com/) API
+Mathify is built using [Grocq](https://groq.com/) API
 
 ## Technologies used
 
